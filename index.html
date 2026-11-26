@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827"><link rel="manifest" href="manifest.json">
+<title>JARVIS Assistente</title>
+<style>
+:root{--bg:#0b1220;--panel:#142236;--line:#2a405a;--txt:#edf5ff;--muted:#9bb1ca;--blue:#55c8ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:16px system-ui,-apple-system,sans-serif}
+main{max-width:680px;margin:auto;min-height:100dvh;padding:calc(15px + env(safe-area-inset-top)) 14px calc(12px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:8px 0 16px}
+.logo{width:45px;height:45px;border:2px solid var(--blue);border-radius:50%;display:grid;place-items:center;color:var(--blue);font-size:22px;font-weight:900}
+h1{font-size:18px;letter-spacing:2px;margin:0}small,.muted{color:var(--muted)}.status{margin-left:auto;font-size:12px;color:#8fe8b6}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.actions button{background:#172a40;border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:12px}
+#chat{flex:1;min-height:220px;max-height:58dvh;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:8px 0 15px}
+.msg{max-width:88%;padding:12px 14px;border-radius:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.4}.ai{align-self:flex-start;background:var(--panel);border:1px solid var(--line)}.user{align-self:flex-end;background:#164361;border:1px solid #28638a}
+form{display:flex;gap:7px;background:#101d2e;border:1px solid var(--line);padding:8px;border-radius:16px}
+input{flex:1;min-width:0;background:transparent;color:var(--txt);border:0;outline:0;font:inherit;padding:9px}
+button{border:0;border-radius:12px;padding:10px 13px;background:#23435f;color:white;font:inherit}.send{background:var(--blue);color:#061522;font-weight:700}
+.toggle{display:flex;gap:9px;align-items:center;font-size:13px;color:var(--muted);margin:12px 2px}.toggle input{flex:initial;width:18px;height:18px}
+footer{text-align:center;font-size:11px;color:#7f96b2;margin-top:8px}
+</style></head>
+<body><main>
+<header><div class="logo">J</div><div><h1>J.A.R.V.I.S.</h1><small>Assistente pessoal</small></div><div class="status">● Pronto</div></header>
+<div class="actions">
+<button onclick="openApp('com.whatsapp','WhatsApp')">Abrir WhatsApp</button>
+<button onclick="openApp('com.google.android.youtube','YouTube')">Abrir YouTube</button>
+<button onclick="openApp('com.android.settings','Configurações')">Configurações</button>
+</div>
+<div id="chat" aria-live="polite"><div class="msg ai">Olá! Sou seu JARVIS. Toque no microfone e fale comigo ou escreva um comando.</div></div>
+<form id="form"><button type="button" onclick="listen()" aria-label="Falar">🎙</button><input id="entry" placeholder="Pergunte ou dê um comando..." autocomplete="off"><button class="send">Enviar</button></form>
+<label class="toggle"><input type="checkbox" id="say" checked> Responder falando</label>
+<footer>Protótipo instalável • Voz depende do navegador e das permissões</footer>
+</main>
+<script>
+const chat=document.querySelector('#chat'),entry=document.querySelector('#entry');
+function add(t,c='ai'){let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function speak(t){if(document.querySelector('#say').checked&&'speechSynthesis'in window){let u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';speechSynthesis.speak(u)}}
+function openApp(pkg,name){add('Para abrir '+name+' diretamente, esta função precisa da versão Android nativa. No momento, posso orientar você a abrir o aplicativo.')}
+function listen(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){add('Seu navegador não oferece reconhecimento de voz. Tente Chrome no Android.');return}let r=new SR();r.lang='pt-BR';r.onresult=e=>{entry.value=e.results[0][0].transcript;send()};r.onerror=()=>add('Não consegui ouvir. Verifique a permissão do microfone.');r.start()}
+function send(){let t=entry.value.trim();if(!t)return;entry.value='';add(t,'user');let s=t.toLowerCase(),r;
+if(s.includes('quem é você')||s.includes('quem e voce'))r='Sou o JARVIS, seu assistente pessoal em desenvolvimento.';
+else if(s.includes('ajuda'))r='Posso conversar, receber comandos de voz e, nesta versão, demonstrar a interface. Para IA real e controle amplo dos aparelhos, precisamos conectar serviços e permissões.';
+else if(s.includes('whatsapp'))r='Você pode abrir o WhatsApp pelo ícone do seu celular. O controle direto do aplicativo será implementado na versão Android.';
+else r='Entendi seu pedido. Esta versão ainda não está conectada a uma IA online. Para isso, será necessário configurar um servidor seguro para proteger a chave da IA.';
+add(r);speak(r)}
+document.querySelector('#form').addEventListener('submit',e=>{e.preventDefault();send()});
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
