@@ -1,13 +1,31 @@
-JARVIS PWA — projeto inicial para instalar no celular
+J.A.R.V.I.S. 2.0 — pacote inicial funcional
 
-Este é um protótipo instalável (PWA), não um APK nativo e ainda não possui IA online.
+O QUE ESTA VERSÃO FAZ
+- Interface futurista adaptável ao celular.
+- Comandos por texto.
+- Reconhecimento de voz quando o navegador oferece Web Speech API.
+- Respostas faladas com síntese de voz do navegador.
+- Cálculos matemáticos básicos.
+- Hora e data.
+- Atalhos para abrir WhatsApp Web, YouTube e Google.
+- Cache básico para abrir a interface offline depois da primeira visita.
 
-Para instalar no Galaxy A14 5G:
-1. Publique estes arquivos em um host HTTPS (por exemplo, GitHub Pages).
-2. Abra o endereço no Chrome do celular.
-3. Menu ⋮ > Instalar app / Adicionar à tela inicial.
+O QUE AINDA NÃO FAZ
+- Não possui IA generativa conectada.
+- Não escuta continuamente a palavra "JARVIS" em segundo plano.
+- Não controla configurações internas do Android nem outros aplicativos livremente.
+- Não é um APK nativo; é uma aplicação web instalável (PWA).
 
-Inclui interface mobile, chat de demonstração, voz do navegador e manifest/service worker.
-Ainda falta: backend seguro para IA real, integração Android nativa para abrir apps/controles,
-e recursos de execução em segundo plano. PWA não pode manter microfone ouvindo continuamente.
-Não coloque chaves secretas de API no HTML/JavaScript.
+COMO TESTAR
+1. Extraia o ZIP.
+2. Publique os arquivos na raiz do repositório GitHub Pages (não envie o próprio ZIP como site).
+3. Abra o endereço do GitHub Pages no Chrome do Android.
+4. Use o menu do Chrome > Adicionar à tela inicial / Instalar.
+5. Permita o microfone quando solicitado.
+
+OBSERVAÇÕES
+- O reconhecimento de voz depende do navegador e pode exigir internet.
+- O atalho do WhatsApp abre o WhatsApp Web; não envia mensagens automaticamente.
+- Nenhuma chave de API está incluída.
+- Não coloque senhas ou chaves secretas em arquivos publicados no GitHub.
+- A integração de IA será feita após escolher um serviço compatível com as regras de idade e obter uma configuração autorizada.
