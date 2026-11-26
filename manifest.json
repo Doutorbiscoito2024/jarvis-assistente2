@@ -1,0 +1,9 @@
+{
+  "name": "JARVIS Assistente Pessoal",
+  "short_name": "JARVIS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#101827",
+  "description": "Assistente pessoal leve para celular"
+}

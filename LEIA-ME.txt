@@ -1,0 +1,13 @@
+JARVIS PWA — projeto inicial para instalar no celular
+
+Este é um protótipo instalável (PWA), não um APK nativo e ainda não possui IA online.
+
+Para instalar no Galaxy A14 5G:
+1. Publique estes arquivos em um host HTTPS (por exemplo, GitHub Pages).
+2. Abra o endereço no Chrome do celular.
+3. Menu ⋮ > Instalar app / Adicionar à tela inicial.
+
+Inclui interface mobile, chat de demonstração, voz do navegador e manifest/service worker.
+Ainda falta: backend seguro para IA real, integração Android nativa para abrir apps/controles,
+e recursos de execução em segundo plano. PWA não pode manter microfone ouvindo continuamente.
+Não coloque chaves secretas de API no HTML/JavaScript.
